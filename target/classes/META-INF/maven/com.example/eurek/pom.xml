@@ -1,11 +1,14 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.example</groupId>
-  <artifactId>eurek</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
-  
-  <parent>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.example</groupId>
+	<artifactId>eurek</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.0.2.RELEASE</version>
@@ -67,6 +70,30 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<groupId>io.fabric8</groupId>
+		<artifactId>docker-maven-plugin</artifactId>
+		<version>0.20.1</version>
+		<configuration>
+			<images>
+				<image>
+					<name>rest-example:${project.version}
+					</name>
+					<alias>rest-example</alias>
+					<build>
+						<from>openjdk:latest</from>
+						<assembly>
+							<descriptorRef>artifact</descriptorRef>
+						</assembly>
+						<cmd>java -jar maven/${project.name}-${project.version}.jar</cmd>
+					</build>
+					<run>
+						<wait>
+							<log>Hello World!</log>
+						</wait>
+					</run>
+				</image>
+			</images>
+		</configuration>
 	</build>
 
 	<repositories>
