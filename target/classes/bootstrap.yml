@@ -1,8 +1,8 @@
-server:
-  port: 8761
 spring:
-  application:
-    name: eureka
-eureka:
-  client:
-    register-with-eureka: false
+ application:
+   name: eureka
+ cloud:
+    config:
+      uri: ${CONFIG_HOME}
+      fail-fast: true
+
