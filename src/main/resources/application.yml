@@ -3,6 +3,6 @@ spring:
    name: eureka
  cloud:
     config:
-      uri: ${CONFIG_HOME}
+      uri: ec2-18-224-108-182.us-east-2.compute.amazonaws.com:8888
       fail-fast: true
 
